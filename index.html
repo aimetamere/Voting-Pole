@@ -70,7 +70,7 @@
 </head>
 <body>
     <div class="poll">
-        <div class="question">"et si la raison n'est pas la meme mais une"</div>
+        <div class="question">et si la raison n'est pas la meme mais une catastrophe du caca on test la longeur?</div>
         <div class="answers">
         </div>
     </div>
@@ -88,7 +88,7 @@
             answers: document.querySelector(".poll .answers")
         };
 
-        pollDOM.question.innerText = "What's your favorite food?";
+        pollDOM.question.innerText = "et si la raison n'est pas la meme mais une catastrophe du caca on test la longeur?";
         pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
             return `
                 <div class="answer" onclick="markAnswer(${i})">
@@ -135,9 +135,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div class="poll">
-    <div class="question">"Qu'elle est t'as couleur préférer"</div>
+    <div class="question">Qu'elle est t'as couleur préférer?</div>
     <div class="answers">
     </div>
 </div>
@@ -155,7 +161,7 @@
         answers: document.querySelector(".poll .answers")
     };
 
-    pollDOM.question.innerText = "What's your favorite food?";
+    pollDOM.question.innerText = "Qu'elle est t'as couleur préférer?";
     pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
         return `
             <div class="answer" onclick="markAnswer(${i})">
