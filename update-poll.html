@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Poll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background: #f0f5ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Poll</h2>
+    <form id="updatePollForm">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required><br><br>
+
+        <label for="answers">Answers (comma-separated):</label>
+        <input type="text" id="answers" name="answers" required><br><br>
+
+        <button type="submit">Update Poll</button>
+    </form>
+
+    <script>
+        document.getElementById('updatePollForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const question = formData.get('question');
+            const answers = formData.get('answers').split(',').map(answer => answer.trim());
+
+            // Send the updated data to the parent window (index.html)
+            window.opener.updatePollData(question, answers);
+            window.close(); // Close the update_poll.html window
+        });
+    </script>
+</body>
+</html># Voting-Pole
