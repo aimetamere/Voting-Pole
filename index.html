@@ -70,7 +70,7 @@
 </head>
 <body>
     <div class="poll">
-        <div class="question">et si la raison n'est pas la meme mais une </div>
+        <div class="question">"et si la raison n'est pas la meme mais une"</div>
         <div class="answers">
         </div>
     </div>
@@ -130,37 +130,74 @@
         window.open('update_poll.html', '_blank');
     }
 
-    // Function to update the poll with new data
-    function updatePollData(newQuestion, newAnswers) {
-        // Update the poll data
-        poll.question = newQuestion;
-        poll.answers = newAnswers;
-        poll.answersWeight = new Array(newAnswers.length).fill(0);  // Reset answer weights
-        poll.selectedAnswer = -1;
-        poll.pollCount = 0;
+</script>
 
-        // Update the poll UI with the new data
-        pollDOM.question.innerText = newQuestion;
-        pollDOM.answers.innerHTML = newAnswers.map((answer, i) => `
+<br>
+<br>
+<br>
+
+<div class="poll">
+    <div class="question">"Qu'elle est t'as couleur préférer"</div>
+    <div class="answers">
+    </div>
+</div>
+
+<script>
+    let poll = {
+        answers: ["Rouge", "Jaune", "Vert", "Rose"],
+        pollCount: 0,
+        answersWeight: [0, 0, 0, 0],
+        selectedAnswer: -1
+    };
+
+    let pollDOM = {
+        question: document.querySelector(".poll .question"),
+        answers: document.querySelector(".poll .answers")
+    };
+
+    pollDOM.question.innerText = "What's your favorite food?";
+    pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
+        return `
             <div class="answer" onclick="markAnswer(${i})">
                 ${answer}
                 <span class="percentage-bar"></span>
                 <span class="percentage-value"></span>
             </div>
-        `).join('');
+        `;
+    }).join("");
 
-        // Clear any selections and update the UI
-        updateUI();
+    function markAnswer(i) {
+        poll.selectedAnswer = +i;
+        try {
+            let selectedAnswer = document.querySelector(".poll .answers .answer.selected");
+            if (selectedAnswer) {
+                selectedAnswer.classList.remove("selected");
+            }
+        } catch (msg) { }
+        document.querySelectorAll(".poll .answers .answer")[+i].classList.add("selected");
+        showResults();
     }
-</script>
 
-<button onclick="openPoll2()">Open Poll 2</button>
+    function showResults() {
+        let answers = document.querySelectorAll(".poll .answers .answer");
+        for (let i = 0; i < answers.length; i++) {
+            let percentage = 0;
+            if (i === poll.selectedAnswer) {
+                percentage = Math.round((poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1));
+            } else {
+                percentage = Math.round((poll.answersWeight[i]) * 100 / (poll.pollCount + 1));
+            }
 
-<script>
-    function openPoll2() {
-        window.open('poll2.html', '_blank');
+            answers[i].querySelector(".percentage-bar").style.width = percentage + "%";
+            answers[i].querySelector(".percentage-value").innerText = percentage + "%";
+        }
     }
+    
+function openUpdatePage() {
+    window.open('update_poll.html', '_blank');
+}
+
 </script>
 
 </body>
-</html># Voting-Pole
+</html>
