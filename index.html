@@ -66,6 +66,11 @@
             z-index: -1;
             transition: width 300ms ease-in-out;
         }
+        .clearfix::after {
+            content: "seperation";
+            clear: both;
+            display: table;
+        }
     </style>
 </head>
 <body>
@@ -79,20 +84,20 @@
     </div>
 
     <script>
-        let poll = {
+        let poll1 = {
             answers: ["Italian", "Japanese", "Chinese", "French"],
-            pollCount: 0,
+            poll1Count: 0,
             answersWeight: [0, 0, 0, 0],
             selectedAnswer: -1
         };
 
-        let pollDOM = {
-            question: document.querySelector(".poll .question"),
-            answers: document.querySelector(".poll .answers")
+        let poll1DOM = {
+            question: document.querySelector(".poll1 .question"),
+            answers: document.querySelector(".poll1 .answers")
         };
 
-        pollDOM.question.innerText = "et si la raison n'est pas la meme mais une catastrophe du caca on test la longeur?";
-        pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
+        poll1DOM.question.innerText = "et si la raison n'est pas la meme mais une catastrophe du caca on test la longeur?";
+        poll1DOM.answers.innerHTML = poll1.answers.map(function (answer, i) {
             return `
                 <div class="answer" onclick="markAnswer(${i})">
                     ${answer}
@@ -103,25 +108,25 @@
         }).join("");
 
         function markAnswer(i) {
-            poll.selectedAnswer = +i;
+            poll1.selectedAnswer = +i;
             try {
-                let selectedAnswer = document.querySelector(".poll .answers .answer.selected");
+                let selectedAnswer = document.querySelector(".poll1 .answers .answer.selected");
                 if (selectedAnswer) {
                     selectedAnswer.classList.remove("selected");
                 }
             } catch (msg) { }
-            document.querySelectorAll(".poll .answers .answer")[+i].classList.add("selected");
+            document.querySelectorAll(".poll1 .answers .answer")[+i].classList.add("selected");
             showResults();
         }
 
         function showResults() {
-            let answers = document.querySelectorAll(".poll .answers .answer");
+            let answers = document.querySelectorAll(".poll1 .answers .answer");
             for (let i = 0; i < answers.length; i++) {
                 let percentage = 0;
-                if (i === poll.selectedAnswer) {
-                    percentage = Math.round((poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1));
+                if (i === poll1.selectedAnswer) {
+                    percentage = Math.round((poll1.answersWeight[i] + 1) * 100 / (poll1.pollCount + 1));
                 } else {
-                    percentage = Math.round((poll.answersWeight[i]) * 100 / (poll.pollCount + 1));
+                    percentage = Math.round((poll1.answersWeight[i]) * 100 / (poll1.pollCount + 1));
                 }
 
                 answers[i].querySelector(".percentage-bar").style.width = percentage + "%";
@@ -135,15 +140,7 @@
 
 </script>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div class="clearfix"></div>
     
 <div class="poll" data-poll-id="poll2">
     <div class="question">Qu'elle est t'as couleur préférer?</div>
@@ -152,20 +149,20 @@
 </div>
 
 <script>
-    let poll = {
+    let poll2 = {
         answers: ["Rouge", "Jaune", "Vert", "Rose"],
-        pollCount: 0,
+        poll2Count: 0,
         answersWeight: [0, 0, 0, 0],
         selectedAnswer: -1
     };
 
-    let pollDOM = {
-        question: document.querySelector(".poll .question"),
-        answers: document.querySelector(".poll .answers")
+    let poll2DOM = {
+        question: document.querySelector(".poll2 .question"),
+        answers: document.querySelector(".poll2 .answers")
     };
 
-    pollDOM.question.innerText = "Qu'elle est t'as couleur préférer?";
-    pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
+    poll2DOM.question.innerText = "Qu'elle est t'as couleur préférer?";
+    poll2DOM.answers.innerHTML = poll2.answers.map(function (answer, i) {
         return `
             <div class="answer" onclick="markAnswer(${i})">
                 ${answer}
@@ -176,9 +173,9 @@
     }).join("");
 
     function markAnswer(i) {
-        poll.selectedAnswer = +i;
+        poll2.selectedAnswer = +i;
         try {
-            let selectedAnswer = document.querySelector(".poll .answers .answer.selected");
+            let selectedAnswer = document.querySelector(".poll2 .answers .answer.selected");
             if (selectedAnswer) {
                 selectedAnswer.classList.remove("selected");
             }
@@ -191,10 +188,10 @@
         let answers = document.querySelectorAll(".poll .answers .answer");
         for (let i = 0; i < answers.length; i++) {
             let percentage = 0;
-            if (i === poll.selectedAnswer) {
-                percentage = Math.round((poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1));
+            if (i === poll2.selectedAnswer) {
+                percentage = Math.round((poll2.answersWeight[i] + 1) * 100 / (poll2.poll2Count + 1));
             } else {
-                percentage = Math.round((poll.answersWeight[i]) * 100 / (poll.pollCount + 1));
+                percentage = Math.round((poll2.answersWeight[i]) * 100 / (poll2.pollCount + 1));
             }
 
             answers[i].querySelector(".percentage-bar").style.width = percentage + "%";
